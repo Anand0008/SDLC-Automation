@@ -8,27 +8,31 @@ Implement Starlette middleware to add five critical security headers to all API 
 ## Implementation Plan
 
 **Step 1: Create SecurityHeadersMiddleware**  
-Implement a new Starlette middleware class in middleware/security_headers.py that adds the five specified security headers. Use BaseHTTPMiddleware as the base class.
+Implement a new Starlette middleware class in middleware/security_headers.py that adds the specified security headers to all API responses
 Files: `middleware/security_headers.py`
 
-**Step 2: Implement Header Injection Logic**  
-Write the middleware's call method to add security headers only if they are not already set by the route handler. Use response.headers.setdefault() to avoid overwriting existing headers.
+**Step 2: Define Security Headers**  
+Create a dictionary of security headers with their specified values, ensuring no overwrite of existing headers
 Files: `middleware/security_headers.py`
 
-**Step 3: Register Middleware in Main Application**  
-Add app.add_middleware(SecurityHeadersMiddleware) in main.py to register the new security headers middleware globally.
+**Step 3: Implement Middleware Logic**  
+Write the call method to add headers only if they do not already exist in the response
+Files: `middleware/security_headers.py`
+
+**Step 4: Register Middleware**  
+Add app.add_middleware(SecurityHeadersMiddleware) in main.py to globally apply the security headers
 Files: `main.py`
 
-**Step 4: Create Unit Test for Security Headers**  
-Develop a unit test using TestClient to verify that all five security headers are present on a sample API response.
+**Step 5: Create Unit Test**  
+Develop a unit test using TestClient to verify all five security headers are present on a response
 Files: `tests/test_security_headers.py`
 
-**Risk Level:** MEDIUM — Low risk implementation that adds security headers without modifying existing route logic. Follows platform middleware patterns and does not introduce complex changes.
+**Risk Level:** LOW — Low risk implementation that enhances security without modifying existing route logic. Middleware approach ensures minimal disruption to existing code.
 
 **Deployment Notes:**
 - Verify headers are added correctly in staging environment
-- Ensure no performance impact from middleware
-- Validate headers do not interfere with existing application responses
+- Perform security scan to confirm header injection
+- No database or schema changes required
 
 ## Test Suggestions
 
@@ -36,7 +40,7 @@ Framework: `pytest`
 
 - **test_security_headers_added_to_all_responses** — Verify that all 5 security headers are added to API responses
 - **test_middleware_does_not_overwrite_existing_headers** *(edge case)* — Ensure middleware does not overwrite headers already set by a route
-- **test_security_headers_present_on_different_http_methods** — Verify security headers are added for different HTTP methods
+- **test_security_headers_values_are_correct** — Validate the exact values of security headers
 
 ## Confluence Documentation References
 
@@ -45,8 +49,8 @@ Framework: `pytest`
 
 **Suggested Documentation Updates:**
 
-- Platform Security Standards - Overview
-- API Development Guidelines
+- Security Architecture Guidelines
+- API Response Standards
 
 ## AI Confidence Scores
 Plan: 95%, Code: 90%, Tests: 90%
