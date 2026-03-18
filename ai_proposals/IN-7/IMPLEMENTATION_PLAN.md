@@ -1,1 +1,162 @@
-IyMgSU4tNzogQWRkIC9oZWFsdGggYW5kIC9yZWFkeXogZW5kcG9pbnRzIGZvciBLdWJlcm5ldGVzIGxpdmVuZXNzIGFuZCByZWFkaW5lc3MgcHJvYmVzCgoqKkppcmEgVGlja2V0OioqIFtJTi03XShodHRwczovL2FuYW5kaW5maW5pdHkwMDA3LmF0bGFzc2lhbi5uZXQvYnJvd3NlL0lOLTcpCgojIyBTdW1tYXJ5CkltcGxlbWVudCBLdWJlcm5ldGVzIGhlYWx0aCBhbmQgcmVhZGluZXNzIHByb2JlIGVuZHBvaW50cyBmb3IgdGhlIGFwcGxpY2F0aW9uCgojIyBJbXBsZW1lbnRhdGlvbiBQbGFuCgoqKlN0ZXAgMTogQ3JlYXRlIGhlYWx0aC5weSByb3V0ZXIgbW9kdWxlKiogIApDcmVhdGUgcm91dGVzL2hlYWx0aC5weSBhbmQgZGVmaW5lIEZhc3RBUEkgcm91dGVyIHdpdGggdHdvIGVuZHBvaW50czogL2hlYWx0aCBhbmQgL3JlYWR5egpGaWxlczogYHJvdXRlcy9oZWFsdGgucHlgCgoqKlN0ZXAgMjogSW1wbGVtZW50IEdFVCAvaGVhbHRoIGVuZHBvaW50KiogIApDcmVhdGUgbGl2ZW5lc3MgcHJvYmUgZW5kcG9pbnQgdGhhdCBhbHdheXMgcmV0dXJucyAyMDAgd2l0aCBzdGF0dXMsIHZlcnNpb24sIGFuZCByZXNwb25zZSB0aW1lCkZpbGVzOiBgcm91dGVzL2hlYWx0aC5weWAKCioqU3RlcCAzOiBJbXBsZW1lbnQgR0VUIC9yZWFkeXogZW5kcG9pbnQgd2l0aCBkYXRhYmFzZSBjaGVjayoqICAKQ3JlYXRlIHJlYWRpbmVzcyBwcm9iZSBlbmRwb2ludCB0aGF0IGNoZWNrcyBTUUxpdGUgZGF0YWJhc2UgY29ubmVjdGl2aXR5IGFuZCByZXR1cm5zIGFwcHJvcHJpYXRlIHN0YXR1cwpGaWxlczogYHJvdXRlcy9oZWFsdGgucHlgCgoqKlN0ZXAgNDogVXBkYXRlIG1haW4ucHkgdG8gaW5jbHVkZSBoZWFsdGggcm91dGVyKiogIApBZGQgaW5jbHVkZV9yb3V0ZXIgY2FsbCBmb3IgaGVhbHRoIHJvdXRlciBpbiBtYWluIGFwcGxpY2F0aW9uIHNldHVwCkZpbGVzOiBgbWFpbi5weWAKCioqU3RlcCA1OiBDcmVhdGUgdW5pdCB0ZXN0cyBmb3IgaGVhbHRoIGVuZHBvaW50cyoqICAKRGV2ZWxvcCBjb21wcmVoZW5zaXZlIHVuaXQgdGVzdHMgY292ZXJpbmcgL2hlYWx0aCBhbmQgL3JlYWR5eiBzdWNjZXNzIGFuZCBmYWlsdXJlIHNjZW5hcmlvcwpGaWxlczogYHRlc3RzL3Rlc3RfaGVhbHRoLnB5YAoKKipSaXNrIExldmVsOioqIExPVyDigJQgTG93IHJpc2sgaW1wbGVtZW50YXRpb24gb2Ygc3RhbmRhcmQgaGVhbHRoIGNoZWNrIGVuZHBvaW50cyB3aXRoIG1pbmltYWwgc3lzdGVtIGltcGFjdC4gQ2hhbmdlcyBhcmUgYWRkaXRpdmUgYW5kIGRvIG5vdCBtb2RpZnkgZXhpc3RpbmcgZnVuY3Rpb25hbGl0eS4KCioqRGVwbG95bWVudCBOb3RlczoqKgotIEVuc3VyZSBBUFBfVkVSU0lPTiBlbnZpcm9ubWVudCB2YXJpYWJsZSBpcyBzZXQgaW4gYWxsIGRlcGxveW1lbnQgZW52aXJvbm1lbnRzCi0gVmVyaWZ5IEt1YmVybmV0ZXMgcHJvYmUgY29uZmlndXJhdGlvbiBtYXRjaGVzIG5ldyBlbmRwb2ludCBiZWhhdmlvcgotIE5vIGRhdGFiYXNlIHNjaGVtYSBjaGFuZ2VzIHJlcXVpcmVkCgojIyBUZXN0IFN1Z2dlc3Rpb25zCgpGcmFtZXdvcms6IGBweXRlc3RgCgotICoqdGVzdF9oZWFsdGhfZW5kcG9pbnRfcmV0dXJuc19jb3JyZWN0X3Jlc3BvbnNlKiog4oCUIFZlcmlmeSBHRVQgL2hlYWx0aCByZXR1cm5zIDIwMCB3aXRoIGNvcnJlY3Qgc3RhdHVzIGFuZCB2ZXJzaW9uIGZpZWxkcwotICoqdGVzdF9yZWFkeXpfZW5kcG9pbnRfd2hlbl9kYXRhYmFzZV9yZWFjaGFibGUqKiDigJQgVmVyaWZ5IEdFVCAvcmVhZHl6IHJldHVybnMgMjAwIHdoZW4gZGF0YWJhc2UgaXMgYWNjZXNzaWJsZQotICoqdGVzdF9yZWFkeXpfZW5kcG9pbnRfd2hlbl9kYXRhYmFzZV91bnJlYWNoYWJsZSoqICooZWRnZSBjYXNlKSog4oCUIFZlcmlmeSBHRVQgL3JlYWR5eiByZXR1cm5zIDUwMyB3aGVuIGRhdGFiYXNlIGlzIG5vdCBhY2Nlc3NpYmxlCi0gKip0ZXN0X2hlYWx0aF9lbmRwb2ludF9yZXNwb25zZV90aW1lX2luY2x1ZGVkKiog4oCUIFZlcmlmeSByZXNwb25zZSB0aW1lIGlzIGluY2x1ZGVkIGluIC9oZWFsdGggZW5kcG9pbnQgcmVzcG9uc2UKLSAqKnRlc3RfcmVhZHl6X2VuZHBvaW50X3Jlc3BvbnNlX3RpbWVfaW5jbHVkZWQqKiDigJQgVmVyaWZ5IHJlc3BvbnNlIHRpbWUgaXMgaW5jbHVkZWQgaW4gL3JlYWR5eiBlbmRwb2ludCByZXNwb25zZQoKIyMgQ29uZmx1ZW5jZSBEb2N1bWVudGF0aW9uIFJlZmVyZW5jZXMKCi0gW0hlYWx0aCBDaGVjayBhbmQgUmVhZGluZXNzIFByb2JlIERlc2lnbl0oaHR0cHM6Ly9hbmFuZGluZmluaXR5MDAwNy5hdGxhc3NpYW4ubmV0L3dpa2kvc3BhY2VzL0lORi9wYWdlcy8yMjkzNzYxKSDigJQgRGlyZWN0bHkgZGVmaW5lcyB0aGUgZXhhY3QgcmVxdWlyZW1lbnRzIGZvciBoZWFsdGggY2hlY2sgYW5kIHJlYWRpbmVzcyBwcm9iZSBlbmRwb2ludHMsIGluY2x1ZGluZyByZXNwb25zZSBzY2hlbWFzLCBwdXJwb3NlLCBhbmQgZXhwZWN0ZWQgYmVoYXZpb3IKCioqU3VnZ2VzdGVkIERvY3VtZW50YXRpb24gVXBkYXRlczoqKgoKLSBIZWFsdGggQ2hlY2sgYW5kIFJlYWRpbmVzcyBQcm9iZSBEZXNpZ24KCiMjIEFJIENvbmZpZGVuY2UgU2NvcmVzClBsYW46IDk1JSwgVGVzdHM6IDkwJQoKLS0tCj4g4pqg77iPICoqVGhpcyBQUiB3YXMgZ2VuZXJhdGVkIGJ5IEFJIChDbGF1ZGUgdmlhIEFXUyBCZWRyb2NrKSBhbmQgcmVxdWlyZXMgdGhvcm91Z2ggaHVtYW4gcmV2aWV3Cj4gYmVmb3JlIG1lcmdpbmcuIFZlcmlmeSBhbGwgbG9naWMsIHRlc3QgY292ZXJhZ2UsIGFuZCBlZGdlIGNhc2VzIGluZGVwZW5kZW50bHkuKioKPgo+IF9HZW5lcmF0ZWQgYnkgQUkgQWdlbnRpYyBTRExDIEFzc2lzdGFudF8=
+## IN-7: Add /health and /readyz endpoints for Kubernetes liveness and readiness probes
+
+**Jira Ticket:** [IN-7](https://anandinfinity0007.atlassian.net/browse/IN-7)
+
+## Summary
+Implement Kubernetes health and readiness probe endpoints (/health and /readyz) with SQLite connectivity check
+
+## Implementation Plan
+
+**Step 1: Create health.py with endpoint models**  
+Define Pydantic models for /health and /readyz response schemas in routes/health.py. Include required fields: status, version (for /health), response_time_ms, and optional reason (for /readyz failure).
+Files: `routes/health.py`
+
+**Step 2: Implement /health endpoint**  
+Create GET /health endpoint that always returns 200. Use os.getenv() to retrieve APP_VERSION, defaulting to 'unknown'. Measure response time using time.time() or similar.
+Files: `routes/health.py`
+
+**Step 3: Implement /readyz endpoint with database check**  
+Create GET /readyz endpoint that performs a SQLite connectivity test using 'SELECT 1'. Return 200 on successful connection, 503 on failure. Include response time and failure reason.
+Files: `routes/health.py`
+
+**Step 4: Create health router**  
+Create a FastAPI APIRouter for health endpoints. Add /health and /readyz routes to the router with appropriate response models and logic.
+Files: `routes/health.py`
+
+**Step 5: Update main.py to include health router**  
+Import the health router in main.py and use include_router() to add it to the main FastAPI application. Add 'health' tag to the router.
+Files: `main.py`
+
+**Step 6: Write unit tests**  
+Create unit tests in test_health.py to cover:
+        1. /health endpoint always returns 200 with correct fields
+        2. /readyz success path with working database
+        3. /readyz failure path with database connection error
+Files: `tests/test_health.py`
+
+**Risk Level:** MEDIUM — Low risk implementation of standard Kubernetes probe endpoints. Minimal changes to existing codebase with clear requirements from Confluence documentation.
+
+**Deployment Notes:**
+- Ensure APP_VERSION environment variable is set in deployment configuration
+- Verify SQLite database connection parameters are correctly configured
+- Update Kubernetes deployment YAML to use new /health and /readyz probe endpoints
+
+## Proposed Code Changes
+
+### `routes/health.py` (create)
+Implement health and readiness probe endpoints as specified in the ticket requirements. The /health endpoint always returns 200 with version and response time. The /readyz endpoint checks SQLite database connectivity and returns appropriate status codes.
+```python
+import os
+import time
+from typing import Optional
+
+import sqlite3
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+
+health_router = APIRouter()
+
+class HealthResponse(BaseModel):
+    status: str = 'ok'
+    version: str
+    response_time_ms: float
+
+class ReadinessResponse(BaseModel):
+    status: str
+    response_time_ms: float
+    reason: Optional[str] = None
+
+@health_router.get('/health', response_model=HealthResponse)
+async def health_check():
+    start_time = time.time()
+    version = os.getenv('APP_VERSION', 'unknown')
+    
+    response_time_ms = round((time.time() - start_time) * 1000, 2)
+    return {
+        'status': 'ok', 
+        'version': version, 
+        'response_time_ms': response_time_ms
+    }
+
+@health_router.get('/readyz', response_model=ReadinessResponse)
+async def readiness_check():
+    start_time = time.time()
+    
+    try:
+        # Attempt to connect to SQLite database
+        conn = sqlite3.connect('app.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT 1')
+        cursor.close()
+        conn.close()
+        
+        response_time_ms = round((time.time() - start_time) * 1000, 2)
+        return {
+            'status': 'ok', 
+            'response_time_ms': response_time_ms
+        }
+    except sqlite3.Error as e:
+        response_time_ms = round((time.time() - start_time) * 1000, 2)
+        raise HTTPException(
+            status_code=503, 
+            detail={
+                'status': 'error', 
+                'response_time_ms': response_time_ms, 
+                'reason': str(e)
+            }
+        )
+
+```
+
+### `main.py` (modify)
+Add health router to the main FastAPI application with 'health' tag as specified in the implementation plan
+```python
+--- a/main.py
++++ b/main.py
+@@ -1,6 +1,7 @@
+ from fastapi import FastAPI
+ 
+ # Import routers
++from routes.health import health_router
+ 
+ app = FastAPI()
+ 
+@@ -8,3 +9,5 @@ app = FastAPI()
+ # Include other routers
+ 
+ # Include health router
++app.include_router(health_router, tags=['health'])
++
+
+```
+
+**New Dependencies:**
+- `sqlite3`
+- `time`
+- `os`
+
+## Test Suggestions
+
+Framework: `pytest`
+
+- **test_health_endpoint_returns_correct_response** — Verify /health endpoint returns 200 with correct fields
+- **test_readiness_probe_with_successful_db_connection** — Verify /readyz returns 200 when database is reachable
+- **test_readiness_probe_with_failed_db_connection** *(edge case)* — Verify /readyz returns 503 when database is not reachable
+- **test_health_endpoint_response_time_included** — Verify response_time_ms is present and is a number
+
+## Confluence Documentation References
+
+- [Health Check and Readiness Probe Design](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2293761) — Directly defines the exact requirements for health check and readiness probe endpoints, including response schemas, purpose, and behavior
+
+**Suggested Documentation Updates:**
+
+- Health Check and Readiness Probe Design
+
+## AI Confidence Scores
+Plan: 95%, Code: 90%, Tests: 95%
+
+---
+> ⚠️ **This PR was generated by AI (Claude via AWS Bedrock) and requires thorough human review
+> before merging. Verify all logic, test coverage, and edge cases independently.**
+>
+> _Generated by AI Agentic SDLC Assistant_
