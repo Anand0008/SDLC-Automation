@@ -1,1 +1,104 @@
-IyMgSU4tMzogQWRkICJSZW1lbWJlciBNZSIgb3B0aW9uIHRvIGV4dGVuZCB1c2VyIHNlc3Npb24gZnJvbSAxNSBtaW51dGVzIHRvIDMwIGRheXMKCioqSmlyYSBUaWNrZXQ6KiogW0lOLTNdKGh0dHBzOi8vYW5hbmRpbmZpbml0eTAwMDcuYXRsYXNzaWFuLm5ldC9icm93c2UvSU4tMykKCiMjIFN1bW1hcnkKSW1wbGVtZW50ICJSZW1lbWJlciBNZSIgZnVuY3Rpb25hbGl0eSBpbiB0b2tlbiBnZW5lcmF0aW9uIHRvIHN1cHBvcnQgZXh0ZW5kZWQgMzAtZGF5IHNlc3Npb25zIGZvciB0cnVzdGVkIGRldmljZXMKCiMjIEltcGxlbWVudGF0aW9uIFBsYW4KCioqU3RlcCAxOiBVcGRhdGUgZ2VuZXJhdGVfdG9rZW5zKCkgZnVuY3Rpb24gc2lnbmF0dXJlKiogIApNb2RpZnkgdGhlIGZ1bmN0aW9uIGluIGF1dGgvand0X2hhbmRsZXIucHkgdG8gYWNjZXB0IGEgbmV3IHJlbWVtYmVyX21lIHBhcmFtZXRlciB3aXRoIGEgZGVmYXVsdCB2YWx1ZSBvZiBGYWxzZQpGaWxlczogYGF1dGgvand0X2hhbmRsZXIucHlgCgoqKlN0ZXAgMjogSW1wbGVtZW50IGNvbmRpdGlvbmFsIHRva2VuIGV4cGlyeSBsb2dpYyoqICAKQWRkIGxvZ2ljIHRvIHNldCBkaWZmZXJlbnQgdG9rZW4gZXhwaXJhdGlvbiB0aW1lcyBiYXNlZCBvbiByZW1lbWJlcl9tZSBmbGFnOgotIFdoZW4gcmVtZW1iZXJfbWU9RmFsc2U6IFVzZSBleGlzdGluZyAxNS1taW4gYWNjZXNzICg5MDBzKSBhbmQgNy1kYXkgcmVmcmVzaCAoNjA0ODAwcykgdG9rZW5zCi0gV2hlbiByZW1lbWJlcl9tZT1UcnVlOiBTZXQgMS1ob3VyIGFjY2VzcyAoMzYwMHMpIGFuZCAzMC1kYXkgcmVmcmVzaCAoMjU5MjAwMHMpIHRva2VucwpGaWxlczogYGF1dGgvand0X2hhbmRsZXIucHlgCgoqKlN0ZXAgMzogVXBkYXRlIGxvZ2luIHJlcXVlc3QgaGFuZGxpbmcqKiAgCk1vZGlmeSBsb2dpbiByZXF1ZXN0IHByb2Nlc3NpbmcgdG8gcGFzcyByZW1lbWJlcl9tZSBwYXJhbWV0ZXIgdG8gZ2VuZXJhdGVfdG9rZW5zKCkgZnVuY3Rpb24KRmlsZXM6IGBhdXRoL2p3dF9oYW5kbGVyLnB5YAoKKipTdGVwIDQ6IENyZWF0ZSB1bml0IHRlc3RzIGZvciBuZXcgdG9rZW4gZ2VuZXJhdGlvbiBzY2VuYXJpb3MqKiAgCkFkZCBuZXcgdW5pdCB0ZXN0cyB0byB2ZXJpZnk6Ci0gRGVmYXVsdCBiZWhhdmlvciAocmVtZW1iZXJfbWU9RmFsc2UpIHJlbWFpbnMgdW5jaGFuZ2VkCi0gcmVtZW1iZXJfbWU9VHJ1ZSBnZW5lcmF0ZXMgMS1ob3VyIGFjY2VzcyBhbmQgMzAtZGF5IHJlZnJlc2ggdG9rZW5zCi0gVG9rZW4gZXhwIGNsYWltIHJlZmxlY3RzIGNvcnJlY3QgZXhwaXJhdGlvbiB0aW1lcwpGaWxlczogYHRlc3RzL3Rlc3Rfand0X2hhbmRsZXIucHlgCgoqKlJpc2sgTGV2ZWw6KiogTUVESVVNIOKAlCBMb3cgcmlzayBtb2RpZmljYXRpb24gdG8gZXhpc3RpbmcgdG9rZW4gZ2VuZXJhdGlvbiBsb2dpYyB3aXRoIG1pbmltYWwgY2hhbmdlcyB0byB0aGUgYXV0aGVudGljYXRpb24gc3lzdGVtLiBDaGFuZ2VzIGFyZSBjb25maW5lZCB0byBhIHNpbmdsZSBmdW5jdGlvbiBhbmQgZG8gbm90IGFsdGVyIGNvcmUgdmFsaWRhdGlvbiBtZWNoYW5pc21zLgoKIyMgUHJvcG9zZWQgQ29kZSBDaGFuZ2VzCgojIyMgYGF1dGgvand0X2hhbmRsZXIucHlgIChtb2RpZnkpCk1vZGlmeSBnZW5lcmF0ZV90b2tlbnMoKSB0byBzdXBwb3J0IGEgbmV3IHJlbWVtYmVyX21lIHBhcmFtZXRlciB3aXRoIGNvbmRpdGlvbmFsIHRva2VuIGV4cGlyYXRpb24gbG9naWMuIFRoaXMgY2hhbmdlIGFsbG93cyBmb3IgZXh0ZW5kZWQgMzAtZGF5IHNlc3Npb25zIG9uIHRydXN0ZWQgZGV2aWNlcyB3aGlsZSBtYWludGFpbmluZyB0aGUgZXhpc3RpbmcgMTUtbWludXRlIHNlc3Npb24gYmVoYXZpb3IgYXMgdGhlIGRlZmF1bHQuCmBgYHB5dGhvbgpAQCAtMSw2ICsxLDYgQEAKIGRlZiBnZW5lcmF0ZV90b2tlbnMoCi0gICAgdXNlcl9pZDogc3RyCisgICAgdXNlcl9pZDogc3RyLAorICAgIHJlbWVtYmVyX21lOiBib29sID0gRmFsc2UKICkgLT4gRGljdFtzdHIsIHN0cl06CiAgICAgIiIiR2VuZXJhdGUgYWNjZXNzIGFuZCByZWZyZXNoIHRva2VucyBmb3IgYSB1c2VyLgogCkBAIC04LDEwICs4LDE2IEBACiAgICAgQXJnczoKICAgICAgICAgdXNlcl9pZCAoc3RyKTogVW5pcXVlIGlkZW50aWZpZXIgZm9yIHRoZSB1c2VyLgorICAgICAgICByZW1lbWJlcl9tZSAoYm9vbCwgb3B0aW9uYWwpOiBGbGFnIHRvIGV4dGVuZCB0b2tlbiBleHBpcmF0aW9uLiBEZWZhdWx0cyB0byBGYWxzZS4KICAgICAKICAgICBSZXR1cm5zOgogICAgICAgICBEaWN0W3N0ciwgc3RyXTogRGljdGlvbmFyeSBjb250YWluaW5nIGFjY2VzcyBhbmQgcmVmcmVzaCB0b2tlbnMuCiAgICAgIiIiCi0gICAgYWNjZXNzX3Rva2VuX2V4cGlyeSA9IDkwMCAgIyAxNSBtaW51dGVzCi0gICAgcmVmcmVzaF90b2tlbl9leHBpcnkgPSA2MDQ4MDAgICMgNyBkYXlzCisgICAgaWYgbm90IHJlbWVtYmVyX21lOgorICAgICAgICBhY2Nlc3NfdG9rZW5fZXhwaXJ5ID0gOTAwICAjIDE1IG1pbnV0ZXMKKyAgICAgICAgcmVmcmVzaF90b2tlbl9leHBpcnkgPSA2MDQ4MDAgICMgNyBkYXlzCisgICAgZWxzZToKKyAgICAgICAgYWNjZXNzX3Rva2VuX2V4cGlyeSA9IDM2MDAgICMgMSBob3VyCisgICAgICAgIHJlZnJlc2hfdG9rZW5fZXhwaXJ5ID0gMjU5MjAwMCAgIyAzMCBkYXlzCiAKICAgICBhY2Nlc3NfdG9rZW4gPSBjcmVhdGVfYWNjZXNzX3Rva2VuKAogICAgICAgICBkYXRhPXsic3ViIjogdXNlcl9pZH0sIGV4cGlyZXNfZGVsdGE9YWNjZXNzX3Rva2VuX2V4cGlyeQoKYGBgCgojIyBUZXN0IFN1Z2dlc3Rpb25zCgpGcmFtZXdvcms6IGBweXRlc3RgCgotICoqdGVzdF9nZW5lcmF0ZV90b2tlbnNfZGVmYXVsdF9yZW1lbWJlcl9tZV9mYWxzZSoqIOKAlCBWZXJpZnkgZGVmYXVsdCB0b2tlbiBnZW5lcmF0aW9uIGJlaGF2aW9yIHdpdGhvdXQgcmVtZW1iZXIgbWUKLSAqKnRlc3RfZ2VuZXJhdGVfdG9rZW5zX3JlbWVtYmVyX21lX3RydWUqKiDigJQgVmVyaWZ5IHRva2VuIGdlbmVyYXRpb24gd2l0aCByZW1lbWJlciBtZSBlbmFibGVkCi0gKip0ZXN0X2dlbmVyYXRlX3Rva2Vuc19wYXlsb2FkX2NvbnRlbnRzKiog4oCUIFZlcmlmeSB0b2tlbiBwYXlsb2FkIGNvbnRhaW5zIGNvcnJlY3QgdXNlciBpbmZvcm1hdGlvbgotICoqdGVzdF9nZW5lcmF0ZV90b2tlbnNfaW52YWxpZF9pbnB1dCoqICooZWRnZSBjYXNlKSog4oCUIFZlcmlmeSBiZWhhdmlvciB3aXRoIGludmFsaWQgaW5wdXQgcGFyYW1ldGVycwoKIyMgQ29uZmx1ZW5jZSBEb2N1bWVudGF0aW9uIFJlZmVyZW5jZXMKCi0gW0F1dGhlbnRpY2F0aW9uIFNlY3VyaXR5IFN0YW5kYXJkcyAtIEJydXRlIEZvcmNlIFByb3RlY3Rpb25dKGh0dHBzOi8vYW5hbmRpbmZpbml0eTAwMDcuYXRsYXNzaWFuLm5ldC93aWtpL3NwYWNlcy9JTkYvcGFnZXMvMjI2MDk5NCkg4oCUIFByb3ZpZGVzIGNvbnRleHQgZm9yIGF1dGhlbnRpY2F0aW9uIHNlY3VyaXR5IHN0YW5kYXJkcywgd2hpY2ggaXMgcmVsZXZhbnQgdG8gdGhlIHRva2VuIGdlbmVyYXRpb24gYW5kIHNlc3Npb24gbWFuYWdlbWVudCBjaGFuZ2VzIHByb3Bvc2VkIGluIHRoZSB0aWNrZXQKCioqU3VnZ2VzdGVkIERvY3VtZW50YXRpb24gVXBkYXRlczoqKgoKLSBBdXRoZW50aWNhdGlvbiBTZWN1cml0eSBTdGFuZGFyZHMgLSBCcnV0ZSBGb3JjZSBQcm90ZWN0aW9uCgojIyBBSSBDb25maWRlbmNlIFNjb3JlcwpQbGFuOiA5NSUsIENvZGU6IDkwJSwgVGVzdHM6IDk1JQoKLS0tCj4g4pqg77iPICoqVGhpcyBQUiB3YXMgZ2VuZXJhdGVkIGJ5IEFJIChDbGF1ZGUgdmlhIEFXUyBCZWRyb2NrKSBhbmQgcmVxdWlyZXMgdGhvcm91Z2ggaHVtYW4gcmV2aWV3Cj4gYmVmb3JlIG1lcmdpbmcuIFZlcmlmeSBhbGwgbG9naWMsIHRlc3QgY292ZXJhZ2UsIGFuZCBlZGdlIGNhc2VzIGluZGVwZW5kZW50bHkuKioKPgo+IF9HZW5lcmF0ZWQgYnkgQUkgQWdlbnRpYyBTRExDIEFzc2lzdGFudF8=
+## IN-3: Add "Remember Me" option to extend user session from 15 minutes to 30 days
+
+**Jira Ticket:** [IN-3](https://anandinfinity0007.atlassian.net/browse/IN-3)
+
+## Summary
+Implement 'Remember Me' functionality in token generation to support 30-day sessions for trusted devices
+
+## Implementation Plan
+
+**Step 1: Update generate_tokens() function signature**  
+Modify the function in auth/jwt_handler.py to accept a new remember_me parameter with a default value of False
+Files: `auth/jwt_handler.py`
+
+**Step 2: Implement conditional token expiry logic**  
+Add logic to set different token expiration times based on remember_me flag:
+- When remember_me=False: 15-min access token, 7-day refresh token (existing behavior)
+- When remember_me=True: 1-hour access token, 30-day refresh token
+Files: `auth/jwt_handler.py`
+
+**Step 3: Update login request handling**  
+Modify login request processing to pass remember_me parameter to generate_tokens() function
+Files: `auth/jwt_handler.py`
+
+**Step 4: Create unit tests for new token generation scenarios**  
+Add new unit tests to verify:
+- Default behavior (remember_me=False) remains unchanged
+- remember_me=True generates 1-hour access and 30-day refresh tokens
+- Correct exp claim is set in JWT payload for both scenarios
+Files: `tests/test_jwt_handler.py`
+
+**Risk Level:** LOW — Low risk modification to existing token generation logic with no changes to validation. Introduces a new optional parameter with conditional token expiry logic.
+
+**Deployment Notes:**
+- Ensure backward compatibility with existing token generation
+- No database schema changes required
+- Minimal impact on existing authentication flow
+
+## Proposed Code Changes
+
+### `auth/jwt_handler.py` (modify)
+Modify generate_tokens() to support a new 'remember_me' parameter that conditionally sets token expiration times. When remember_me=True, extend access token to 1 hour and refresh token to 30 days. Maintain existing 15-min/7-day behavior when remember_me=False.
+```python
+@@ -1,6 +1,6 @@
+ def generate_tokens(
+-    user_id: str
++    user_id: str,
++    remember_me: bool = False
+ ) -> Dict[str, str]:
+     """Generate access and refresh tokens for a user.
+ 
+@@ -8,10 +8,16 @@
+     Args:
+         user_id (str): Unique identifier for the user.
++        remember_me (bool, optional): Flag to extend token expiration. Defaults to False.
+     
+     Returns:
+         Dict[str, str]: Generated access and refresh tokens.
+     """
+-    access_token_expires = timedelta(minutes=15)
+-    refresh_token_expires = timedelta(days=7)
++    if remember_me:
++        access_token_expires = timedelta(hours=1)  # 1-hour access token
++        refresh_token_expires = timedelta(days=30)  # 30-day refresh token
++    else:
++        access_token_expires = timedelta(minutes=15)  # 15-min access token
++        refresh_token_expires = timedelta(days=7)  # 7-day refresh token
+     
+     access_token = create_access_token(
+         data={"sub": user_id}, expires_delta=access_token_expires
+     )
+     refresh_token = create_refresh_token(
+         data={"sub": user_id}, expires_delta=refresh_token_expires
+     )
+     
+     return {"access_token": access_token, "refresh_token": refresh_token}
+
+```
+
+## Test Suggestions
+
+Framework: `pytest`
+
+- **test_generate_tokens_default_remember_me_false** — Verify default token generation behavior without remember me
+- **test_generate_tokens_remember_me_true** — Verify token generation with remember me enabled
+- **test_token_expiry_claims_remember_me_false** — Validate JWT payload expiration claims for default remember me behavior
+- **test_token_expiry_claims_remember_me_true** — Validate JWT payload expiration claims for remember me enabled
+- **test_generate_tokens_invalid_user_id** *(edge case)* — Verify behavior with invalid user ID
+
+## Confluence Documentation References
+
+- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Provides context for authentication security standards, which is relevant to token generation and session management
+
+**Suggested Documentation Updates:**
+
+- Authentication Security Standards - Brute Force Protection
+
+## AI Confidence Scores
+Plan: 95%, Code: 90%, Tests: 95%
+
+---
+> ⚠️ **This PR was generated by AI (Claude via AWS Bedrock) and requires thorough human review
+> before merging. Verify all logic, test coverage, and edge cases independently.**
+>
+> _Generated by AI Agentic SDLC Assistant_
