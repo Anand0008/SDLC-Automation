@@ -7,32 +7,20 @@ Implement login attempt protection with Redis-backed lockout mechanism
 
 ## Implementation Plan
 
-**Step 1: Create LoginGuard Redis Integration**  
-Implement LoginGuard class in auth/login_guard.py with Redis connection and core methods
+**Step 1: Create LoginGuard class in login_guard.py**  
+Implement Redis-backed login failure tracking with methods for recording failures, checking lockout status, and resetting counter
 Files: `auth/login_guard.py`
 
-**Step 2: Implement Failure Tracking Method**  
-Develop record_failure() method to increment Redis counter with 15-minute TTL
+**Step 2: Implement Redis connection and error handling**  
+Set up Redis connection with fail-open strategy. Ensure graceful handling if Redis is unavailable
 Files: `auth/login_guard.py`
 
-**Step 3: Create Lockout Check Method**  
-Implement is_locked() method to check counter and return lockout status with remaining time
-Files: `auth/login_guard.py`
-
-**Step 4: Add Reset Mechanism**  
-Implement reset() method to clear Redis counter on successful login
-Files: `auth/login_guard.py`
-
-**Step 5: Modify JWT Handler**  
-Update auth/jwt_handler.py to integrate LoginGuard checks before password verification
+**Step 3: Modify jwt_handler.py login endpoint**  
+Update login logic to check LoginGuard.is_locked() before password verification. Add HTTP 423 response for locked accounts
 Files: `auth/jwt_handler.py`
 
-**Step 6: Implement Fail-Open Strategy**  
-Add Redis connection error handling to allow login if Redis is unavailable
-Files: `auth/login_guard.py`, `auth/jwt_handler.py`
-
-**Step 7: Create Unit Tests**  
-Develop comprehensive test suite covering lockout scenarios, reset, and fail-open behavior
+**Step 4: Create unit tests for LoginGuard**  
+Develop comprehensive test suite covering lockout scenarios, reset functionality, and Redis failure modes
 Files: `tests/test_login_guard.py`
 
 **Risk Level:** MEDIUM — Medium risk due to security-critical feature involving authentication logic. Potential for introducing authentication bypass if not implemented carefully.
@@ -41,16 +29,15 @@ Files: `tests/test_login_guard.py`
 
 Framework: `pytest`
 
-- **test_account_locks_after_five_consecutive_failed_attempts** *(edge case)* — Verify account gets locked after 5 consecutive failed login attempts
-- **test_locked_account_returns_retry_after_seconds** *(edge case)* — Verify locked account response includes retry-after seconds
+- **test_account_locks_after_five_consecutive_failed_attempts** *(edge case)* — Verify account locks after 5 consecutive failed login attempts
+- **test_locked_account_returns_retry_after_seconds** — Verify locked account response includes retry-after seconds
 - **test_successful_login_resets_failure_counter** — Verify successful login resets consecutive failure count
-- **test_lockout_expires_after_fifteen_minutes** *(edge case)* — Verify account lockout automatically expires after 15 minutes
-- **test_login_proceeds_when_redis_is_unavailable** *(edge case)* — Verify login works normally if Redis is down
-- **test_login_fails_on_incorrect_password_before_lockout** — Verify login fails with incorrect password before lockout
+- **test_account_unlocks_after_fifteen_minutes** *(edge case)* — Verify account automatically unlocks after 15 minutes
+- **test_login_proceeds_when_redis_is_unavailable** *(edge case)* — Verify login proceeds normally if Redis is down
 
 ## Confluence Documentation References
 
-- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Directly describes the brute-force protection policy that this ticket is implementing, including specific details about lockout parameters and threat models
+- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Directly describes the brute-force protection policy that this ticket is implementing, including specific details about lockout duration, max failed attempts, and counter scoping.
 
 **Suggested Documentation Updates:**
 
