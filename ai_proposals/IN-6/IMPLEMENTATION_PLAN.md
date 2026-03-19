@@ -7,45 +7,40 @@ Implement X-Request-ID middleware for end-to-end request tracing in FastAPI appl
 
 ## Implementation Plan
 
-**Step 1: Create request_id.py middleware module**  
-Implement RequestIDMiddleware as a FastAPI BaseHTTPMiddleware subclass with UUID validation and request ID handling
+**Step 1: Create RequestIDMiddleware**  
+Implement RequestIDMiddleware in middleware/request_id.py using Starlette's BaseHTTPMiddleware. Implement UUID validation and generation logic.
 Files: `middleware/request_id.py`
 
-**Step 2: Implement UUID validation logic**  
-Create a regex-based validator for UUID v4 matching the specified pattern from Confluence documentation
+**Step 2: Configure Structlog Context**  
+Modify middleware to bind request_id to structlog context, ensuring all log lines include the trace identifier.
 Files: `middleware/request_id.py`
 
-**Step 3: Configure structlog context binding**  
-Modify middleware to bind request_id to structlog context for consistent logging across request lifecycle
-Files: `middleware/request_id.py`
-
-**Step 4: Update main.py for middleware registration**  
-Add app.add_middleware(RequestIDMiddleware) to register the new middleware
+**Step 3: Register Middleware**  
+Add app.add_middleware(RequestIDMiddleware) in main.py to activate the new middleware.
 Files: `main.py`
 
-**Step 5: Create unit tests**  
-Develop comprehensive unit tests covering UUID generation and passthrough scenarios
-Files: `tests/test_request_id_middleware.py`
+**Step 4: Create Unit Tests**  
+Develop unit tests in test_request_id.py to cover UUID generation and passthrough scenarios.
+Files: `tests/test_request_id.py`
 
 **Risk Level:** MEDIUM — Low risk implementation that adds observability without changing existing application logic. Middleware is non-invasive and follows established tracing standards.
 
 **Deployment Notes:**
-- Ensure middleware does not introduce performance overhead
-- Validate that request tracing works across all API endpoints
-- Verify logging context is correctly populated
+- No database changes required
+- Minimal runtime overhead from middleware
 
 ## Test Suggestions
 
 Framework: `pytest`
 
-- **test_request_id_auto_generated_when_not_provided** — Verify that a UUID4 is generated when no X-Request-ID header is present
-- **test_request_id_passthrough_when_provided** — Verify that a provided X-Request-ID is echoed back exactly
-- **test_request_id_invalid_header_generates_new_uuid** *(edge case)* — Verify that an invalid X-Request-ID header results in a new UUID4
-- **test_request_id_logged_in_request_context** — Verify that log lines contain the request_id during request processing
+- **test_request_id_auto_generated_when_not_provided** — Verify UUID4 is generated when no X-Request-ID header is present
+- **test_request_id_passthrough_when_provided** — Verify provided X-Request-ID is echoed back in response
+- **test_request_id_invalid_header_generates_new_uuid** *(edge case)* — Verify invalid X-Request-ID header triggers UUID generation
+- **test_request_id_logged_in_request_context** — Verify request_id is added to log context
 
 ## Confluence Documentation References
 
-- [Request Tracing Standards - X-Request-ID](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1769475) — Provides the exact specification for X-Request-ID header implementation, including UUID validation rules, header contract, and middleware implementation guidance
+- [Request Tracing Standards - X-Request-ID](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1769475) — Directly defines the standards for X-Request-ID header implementation, including UUID validation, generation rules, and header contract
 
 **Suggested Documentation Updates:**
 
