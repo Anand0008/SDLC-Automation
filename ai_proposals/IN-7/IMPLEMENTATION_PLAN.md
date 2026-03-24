@@ -3,44 +3,45 @@
 **Jira Ticket:** [IN-7](https://anandinfinity0007.atlassian.net/browse/IN-7)
 
 ## Summary
-Implement Kubernetes health and readiness probe endpoints (/health and /readyz) with database connectivity check
+Implement Kubernetes health and readiness probe endpoints for the application
 
 ## Implementation Plan
 
-**Step 1: Create routes/health.py**  
-Implement FastAPI router with /health and /readyz endpoints. Use os module to read APP_VERSION and time module for response timing.
+**Step 1: Create health.py router module**  
+Create routes/health.py and define FastAPI router with /health and /readyz endpoints. Import required dependencies (time, os, sqlite3).
 Files: `routes/health.py`
 
-**Step 2: Implement GET /health endpoint**  
-Create endpoint that always returns 200 with status=ok, version from APP_VERSION, and response_time_ms. Ensure no external dependency checks.
+**Step 2: Implement /health endpoint**  
+Create GET /health endpoint that returns 200 with status='ok', version from APP_VERSION env var, and response time. Ensure it always returns successfully.
 Files: `routes/health.py`
 
-**Step 3: Implement GET /readyz endpoint**  
-Create endpoint that checks SQLite database connectivity. Return 200 on successful connection, 503 on failure. Include response_time_ms and optional reason for failure.
+**Step 3: Implement /readyz endpoint with database check**  
+Create GET /readyz endpoint that performs SQLite database connectivity test. Return 200 if database is reachable, 503 if not, including reason and response time.
 Files: `routes/health.py`
 
-**Step 4: Update main.py**  
-Import health router and use include_router() to register health endpoints with 'health' tag
+**Step 4: Update main.py to include health router**  
+Import health router in main.py and use include_router() to register the health endpoints with 'health' tag.
 Files: `main.py`
 
-**Step 5: Create unit tests**  
-Write pytest tests for /health and /readyz endpoints covering success and failure scenarios. Test response structure, status codes, and timing.
+**Step 5: Create unit tests for health endpoints**  
+Write unit tests to cover /readyz success and failure paths, verifying response codes, body content, and database connectivity handling.
 Files: `tests/test_health.py`
 
-**Risk Level:** MEDIUM — Low risk implementation of standard Kubernetes probe endpoints. Minimal changes to existing codebase with clear requirements. Primary risks include potential database connection handling and ensuring consistent response formatting.
+**Risk Level:** LOW — Low risk implementation of standard health check endpoints with clear requirements. Minimal changes to existing codebase, adding new functionality without modifying existing systems.
 
 **Deployment Notes:**
-- Ensure APP_VERSION environment variable is set in deployment configuration
-- Verify SQLite database connection parameters are correctly configured
-- Update Kubernetes deployment YAML to use new /health and /readyz probe endpoints
+- Ensure APP_VERSION is set in deployment environment
+- Verify Kubernetes probe configurations match new endpoint behavior
 
 ## Test Suggestions
 
 Framework: `pytest`
 
-- **test_health_endpoint_returns_correct_response** — Verify health endpoint returns 200 with correct status and version
-- **test_readyz_endpoint_database_accessible** — Verify readiness endpoint returns 200 when database is reachable
-- **test_readyz_endpoint_database_inaccessible** *(edge case)* — Verify readiness endpoint returns 503 when database is not reachable
+- **test_health_endpoint_returns_correct_response** — Verify GET /health returns 200 with correct status and version fields
+- **test_readyz_endpoint_when_database_reachable** — Verify GET /readyz returns 200 when database is accessible
+- **test_readyz_endpoint_when_database_unreachable** *(edge case)* — Verify GET /readyz returns 503 when database is not accessible
+- **test_health_endpoint_response_time_included** — Verify response_time_ms is included in /health response
+- **test_readyz_endpoint_response_time_included** — Verify response_time_ms is included in /readyz response
 
 ## Confluence Documentation References
 
