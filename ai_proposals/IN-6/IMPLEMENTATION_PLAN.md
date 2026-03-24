@@ -7,130 +7,52 @@ Implement X-Request-ID middleware for end-to-end request tracing in FastAPI appl
 
 ## Implementation Plan
 
-**Step 1: Create request_id.py middleware module**  
-Implement RequestIDMiddleware as a FastAPI BaseHTTPMiddleware subclass with UUID validation and generation logic
+**Step 1: Create RequestIDMiddleware**  
+Implement RequestIDMiddleware in middleware/request_id.py using Starlette's BaseHTTPMiddleware. Validate and process X-Request-ID header according to UUID v4 rules.
 Files: `middleware/request_id.py`
 
-**Step 2: Implement UUID validation method**  
-Create a static method to validate incoming X-Request-ID against UUID v4 regex pattern from Confluence guidelines
+**Step 2: Implement UUID Validation**  
+Create a regex-based UUID v4 validator function. Use pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
 Files: `middleware/request_id.py`
 
-**Step 3: Configure structlog context binding**  
-Modify middleware to bind request_id to structlog context for consistent logging across request lifecycle
+**Step 3: Configure Structlog Context**  
+Modify middleware to bind request_id to structlog context, ensuring all log lines include the trace identifier
 Files: `middleware/request_id.py`
 
-**Step 4: Update main.py middleware registration**  
-Add app.add_middleware(RequestIDMiddleware) to register the new middleware
+**Step 4: Register Middleware**  
+Add app.add_middleware(RequestIDMiddleware) in main.py to activate the new middleware
 Files: `main.py`
 
-**Step 5: Create unit tests**  
-Develop comprehensive unit tests covering UUID generation and passthrough scenarios
-Files: `tests/test_request_id_middleware.py`
+**Step 5: Create Unit Tests**  
+Develop unit tests covering UUID generation and passthrough scenarios for RequestIDMiddleware
+Files: `tests/test_middleware/test_request_id.py`
 
-**Risk Level:** MEDIUM — Low risk implementation that adds observability without changing existing application logic. Middleware is non-invasive and follows established tracing standards.
+**Risk Level:** MEDIUM — Low risk implementation that adds observability without changing existing application logic. Middleware is non-invasive and follows established tracing patterns.
 
-## Proposed Code Changes
-
-### `middleware/request_id.py` (create)
-Implement RequestIDMiddleware to handle X-Request-ID header processing, UUID validation, and structlog context binding as per ticket requirements.
-```python
-import uuid
-import re
-from typing import Callable, Optional
-
-import structlog
-from fastapi import Request, Response
-from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
-
-logger = structlog.get_logger(__name__)
-
-class RequestIDMiddleware(BaseHTTPMiddleware):
-    UUID4_PATTERN = re.compile(r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', re.IGNORECASE)
-
-    @staticmethod
-    def validate_uuid4(request_id: str) -> bool:
-        """
-        Validate if the given string is a valid UUID v4.
-        
-        Args:
-            request_id (str): Request ID to validate
-        
-        Returns:
-            bool: True if valid UUID v4, False otherwise
-        """
-        return bool(RequestIDMiddleware.UUID4_PATTERN.match(request_id))
-
-    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
-        """
-        Middleware to handle X-Request-ID header processing.
-        
-        Args:
-            request (Request): Incoming HTTP request
-            call_next (RequestResponseEndpoint): Next middleware or route handler
-        
-        Returns:
-            Response: HTTP response with X-Request-ID header
-        """
-        # Extract or generate request ID
-        request_id_header = request.headers.get('X-Request-ID')
-        
-        if request_id_header and self.validate_uuid4(request_id_header):
-            request_id = request_id_header
-        else:
-            request_id = str(uuid.uuid4())
-        
-        # Bind request ID to structlog context
-        structlog.contextvars.bind_contextvars(request_id=request_id)
-        
-        try:
-            # Process the request
-            response = await call_next(request)
-        except Exception as e:
-            # Ensure request_id is logged even if an exception occurs
-            logger.exception('Request processing failed', request_id=request_id)
-            raise
-        finally:
-            # Clear structlog context after request
-... (truncated — see full diff in files)
-```
-
-### `main.py` (modify)
-Register RequestIDMiddleware to process X-Request-ID for all incoming requests
-```python
---- a/main.py
-+++ b/main.py
-@@ -1,6 +1,7 @@
- from fastapi import FastAPI
- 
- from middleware.request_id import RequestIDMiddleware
- 
- app = FastAPI()
- 
- app.add_middleware(RequestIDMiddleware)
-
-```
-
-**New Dependencies:**
-- `structlog`
+**Deployment Notes:**
+- No database migrations required
+- Middleware can be deployed without downtime
+- Minimal performance overhead expected
 
 ## Test Suggestions
 
 Framework: `pytest`
 
-- **test_request_id_middleware_generates_uuid_when_header_missing** — Verify middleware generates a valid UUID4 when X-Request-ID header is not provided
-- **test_request_id_middleware_preserves_valid_uuid_header** — Verify middleware preserves a valid UUID4 X-Request-ID header
-- **test_request_id_middleware_rejects_invalid_uuid_header** *(edge case)* — Verify middleware generates a new UUID when an invalid UUID is provided
+- **test_request_id_auto_generated_when_not_provided** — Verify that a UUID4 is automatically generated when no X-Request-ID header is present
+- **test_request_id_passthrough_when_provided** — Verify that a provided X-Request-ID header is echoed back exactly
+- **test_request_id_invalid_header_generates_new_uuid** *(edge case)* — Verify that an invalid X-Request-ID header results in a new UUID4 being generated
+- **test_request_id_logged_in_request_context** — Verify that the request ID is available in log lines during request processing
 
 ## Confluence Documentation References
 
-- [Request Tracing Standards - X-Request-ID](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1769475) — Directly defines the standards for X-Request-ID header implementation, including UUID validation, generation rules, and header contract
+- [Request Tracing Standards - X-Request-ID](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1769475) — Provides the exact specification for X-Request-ID header implementation, including UUID validation rules and middleware requirements
 
 **Suggested Documentation Updates:**
 
 - Request Tracing Standards - X-Request-ID
 
 ## AI Confidence Scores
-Plan: 95%, Code: 90%, Tests: 95%
+Plan: 95%, Code: 90%, Tests: 90%
 
 ---
 > ⚠️ **This PR was generated by AI (Claude via AWS Bedrock) and requires thorough human review
