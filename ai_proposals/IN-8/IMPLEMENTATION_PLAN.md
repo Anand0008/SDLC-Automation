@@ -3,36 +3,31 @@
 **Jira Ticket:** [IN-8](https://anandinfinity0007.atlassian.net/browse/IN-8)
 
 ## Summary
-Implement Starlette middleware to add five security headers to all API responses without overwriting existing headers
+Implement Starlette middleware to inject five security headers across all API responses
 
 ## Implementation Plan
 
 **Step 1: Create SecurityHeadersMiddleware**  
-Implement a new middleware class in middleware/security_headers.py using Starlette's BaseHTTPMiddleware. The middleware will add security headers to responses without overwriting existing headers.
+Implement a new middleware class in middleware/security_headers.py using Starlette's BaseHTTPMiddleware. Create a method to inject security headers without overwriting existing headers.
 Files: `middleware/security_headers.py`
 
 **Step 2: Define Security Headers**  
-Create a dictionary of security headers with their predefined values as specified in the ticket requirements. Implement logic to only add headers that are not already present in the response.
+Create class-level constants for the five required security headers with their specified values. Implement a method to safely add headers only if they do not already exist.
 Files: `middleware/security_headers.py`
 
-**Step 3: Implement Middleware Call Method**  
-Override the dispatch method to add security headers to the response. Use a conditional check to prevent overwriting existing headers.
+**Step 3: Implement Header Injection Logic**  
+Override the dispatch method of BaseHTTPMiddleware to add security headers to the response. Use response.headers.setdefault() to avoid overwriting existing headers.
 Files: `middleware/security_headers.py`
 
 **Step 4: Register Middleware in Main Application**  
-Add a single line in main.py to register the SecurityHeadersMiddleware using app.add_middleware()
+Add app.add_middleware(SecurityHeadersMiddleware) in main.py to register the new security headers middleware.
 Files: `main.py`
 
 **Step 5: Create Unit Test**  
 Develop a unit test using TestClient to verify that all five security headers are present on a response and that existing headers are not overwritten.
 Files: `tests/test_security_headers.py`
 
-**Risk Level:** MEDIUM — Low risk implementation that enhances security by adding standard protective headers. The middleware approach ensures minimal impact on existing routes and follows platform conventions.
-
-**Deployment Notes:**
-- Ensure middleware is added before other middleware that might modify responses
-- Verify headers are correctly applied in all environments (dev, staging, production)
-- Perform security scan to confirm header injection
+**Risk Level:** MEDIUM — Low risk implementation that adds security headers without modifying existing route logic. Follows established middleware patterns in the platform.
 
 ## Test Suggestions
 
@@ -40,17 +35,18 @@ Framework: `pytest`
 
 - **test_security_headers_added_to_all_responses** — Verify that all 5 security headers are added to API responses
 - **test_middleware_does_not_overwrite_existing_headers** *(edge case)* — Ensure middleware does not overwrite headers already set by a route
-- **test_security_headers_present_on_different_http_methods** — Verify security headers are added for different HTTP methods
+- **test_security_headers_present_on_different_http_methods** — Validate security headers are added for different HTTP methods
 
 ## Confluence Documentation References
 
-- [Request Tracing Standards - X-Request-ID](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1769475) — Demonstrates the platform's existing middleware pattern for adding headers using Starlette's BaseHTTPMiddleware, which is directly relevant to the security headers implementation
-- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Shows the organization's commitment to security standards and provides context for implementing security-related middleware
+- [Request Tracing Standards - X-Request-ID](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1769475) — Demonstrates the platform's existing middleware pattern for adding headers via Starlette's BaseHTTPMiddleware, which is directly relevant to the security headers implementation
+- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Provides context for the platform's security-focused middleware approach, reinforcing the importance of implementing security headers consistently
 
 **Suggested Documentation Updates:**
 
-- Security Architecture Overview
-- API Development Guidelines
+- Security Headers Implementation Guide
+- API Response Standards
+- Platform Middleware Patterns
 
 ## AI Confidence Scores
 Plan: 95%, Code: 90%, Tests: 90%
