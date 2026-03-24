@@ -7,31 +7,27 @@ Implement async welcome email functionality for new user registrations
 
 ## Implementation Plan
 
-**Step 1: Create SMTP Email Configuration**  
-Extract SMTP configuration from config/settings.py. Create a reusable email configuration helper that loads SMTP credentials securely.
-Files: `config/settings.py`, `notifications/email_config.py`
+**Step 1: Create SMTP Email Utility**  
+Implement async email sending utility in notifications/welcome_email.py with error handling and logging
+Files: `notifications/welcome_email.py`, `notifications/__init__.py`
 
-**Step 2: Implement Welcome Email Template**  
-Create HTML and plain text email templates with inline CSS. Use Jinja2 or string formatting for variable substitution. Include personalized greeting, platform description, and CTA button.
-Files: `notifications/templates/welcome_email.html`, `notifications/templates/welcome_email.txt`
-
-**Step 3: Develop Async Welcome Email Function**  
-Create send_welcome_email() in notifications/welcome_email.py. Implement async email sending using smtplib, with error handling and structlog warning for SMTP failures.
+**Step 2: Develop Email Templates**  
+Create multipart HTML and plain text email templates with personalization and CTA
 Files: `notifications/welcome_email.py`
 
-**Step 4: Modify Registration Flow**  
-Update auth/jwt_handler.py to call send_welcome_email() using asyncio.create_task() after successful token generation. Ensure non-blocking behavior.
+**Step 3: Modify JWT Handler**  
+Update auth/jwt_handler.py to call send_welcome_email() after successful token generation
 Files: `auth/jwt_handler.py`
 
-**Step 5: Create Unit Tests**  
-Develop comprehensive unit tests in test/notifications/test_welcome_email.py. Cover happy path email queuing and SMTP failure scenarios.
-Files: `test/notifications/test_welcome_email.py`
+**Step 4: Implement Unit Tests**  
+Create comprehensive unit tests for welcome email functionality, covering happy path and SMTP failure scenarios
+Files: `tests/test_welcome_email.py`
 
-**Risk Level:** MEDIUM — Medium risk due to integration with external SMTP service and potential impact on user registration flow. Mitigated by async dispatch and error handling.
+**Risk Level:** LOW — Low risk implementation with clear requirements and minimal system impact. The email sending is non-blocking and will not interrupt the core registration flow.
 
 **Deployment Notes:**
-- Verify SMTP credentials in staging environment
-- Ensure FRONTEND_URL environment variable is correctly set
+- Ensure SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD are set in deployment environment
+- Validate email template rendering across different email clients
 - Monitor email delivery rates and potential SMTP connection issues
 
 ## Test Suggestions
@@ -43,14 +39,6 @@ Framework: `pytest`
 - **test_welcome_email_cta_link** — Confirm CTA link points to correct frontend URL
 - **test_registration_succeeds_on_smtp_failure** *(edge case)* — Ensure user registration completes even if email sending fails
 - **test_welcome_email_dispatch_timeout** — Verify email is sent within 2 seconds
-
-## Confluence Documentation References
-
-- [Transactional Email Design - Welcome Flow](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/1605634) — Directly provides the email design specifications, HTML template guidelines, and dispatch requirements for the welcome email implementation
-
-**Suggested Documentation Updates:**
-
-- Transactional Email Design - Welcome Flow
 
 ## AI Confidence Scores
 Plan: 90%, Code: 90%, Tests: 90%
