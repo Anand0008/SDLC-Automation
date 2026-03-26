@@ -3,56 +3,51 @@
 **Jira Ticket:** [IN-1](https://anandinfinity0007.atlassian.net/browse/IN-1)
 
 ## Summary
-Implement login attempt protection with Redis-backed lockout mechanism for preventing brute-force attacks
+Implement login attempt protection with Redis-backed account lockout mechanism
 
 ## Implementation Plan
 
-**Step 1: Create LoginGuard Redis Interaction Class**  
-Implement LoginGuard class in auth/login_guard.py with methods for tracking and managing login failures using Redis
+**Step 1: Install Redis Python Client**  
+Add redis package to project dependencies and ensure Redis connection is configurable
+Files: `requirements.txt`, `config.py`
+
+**Step 2: Create LoginGuard Class**  
+Implement LoginGuard in auth/login_guard.py with methods for recording failures, checking lockout status, and resetting counter. Use type hints and handle Redis connection errors.
 Files: `auth/login_guard.py`
 
-**Step 2: Implement record_failure Method**  
-Create method to increment Redis counter for username, setting 15-minute TTL. Key format: login:fail:{username}
-Files: `auth/login_guard.py`
-
-**Step 3: Implement is_locked Method**  
-Add method to check if login attempts exceed 5, return lock status and remaining TTL. Implement fail-open logic for Redis unavailability
-Files: `auth/login_guard.py`
-
-**Step 4: Implement reset Method**  
-Create method to delete Redis key on successful login, clearing failure counter
-Files: `auth/login_guard.py`
-
-**Step 5: Modify JWT Handler Login Flow**  
-Update auth/jwt_handler.py to call LoginGuard methods before password validation and on successful login
+**Step 3: Modify JWT Handler Login Flow**  
+Update auth/jwt_handler.py to integrate LoginGuard methods. Add checks for account lockout before password verification, and reset counter on successful login.
 Files: `auth/jwt_handler.py`
 
-**Step 6: Create Unit Tests**  
-Develop comprehensive test cases covering lockout scenarios, reset logic, and Redis failure handling
-Files: `tests/test_login_guard.py`
+**Step 4: Implement Error Handling**  
+Create HTTP 423 response with retry_after_seconds when account is locked. Ensure fail-open behavior if Redis is unavailable.
+Files: `auth/jwt_handler.py`
 
-**Risk Level:** MEDIUM — Medium risk due to security-critical feature involving authentication logic. Potential for introducing authentication bypass if not implemented carefully.
+**Step 5: Write Unit Tests**  
+Create comprehensive test suite in test/auth/test_login_guard.py covering lockout scenarios, reset behavior, and Redis failure handling.
+Files: `test/auth/test_login_guard.py`
+
+**Risk Level:** MEDIUM — Medium risk due to security-sensitive authentication logic modification. Potential for introducing authentication bypass or incorrect lockout behavior.
 
 **Deployment Notes:**
-- Ensure Redis connection is configured
-- Update authentication documentation
-- Communicate lockout mechanism to support team
-- Verify no regression in existing login flows
+- Ensure Redis connection is properly configured in all environments
+- Update monitoring to track login lockout events
+- Communicate new lockout policy to users/support team
 
 ## Test Suggestions
 
 Framework: `pytest`
 
 - **test_account_locks_after_five_consecutive_failed_attempts** — Verify account gets locked after 5 consecutive failed login attempts
-- **test_locked_account_returns_retry_after_seconds** — Verify locked account response includes retry-after seconds
-- **test_successful_login_resets_failure_counter** — Verify login failure counter resets after successful authentication
-- **test_account_automatically_unlocks_after_fifteen_minutes** *(edge case)* — Verify account automatically unlocks after 15-minute lockout period
-- **test_login_proceeds_when_redis_is_unavailable** *(edge case)* — Verify login process continues if Redis is down (fail-open behavior)
-- **test_blocking_occurs_on_sixth_login_attempt_when_locked** *(edge case)* — Verify 6th login attempt is blocked regardless of password correctness
+- **test_lockout_returns_retry_after_seconds** — Verify locked out attempt returns retry-after seconds
+- **test_successful_login_resets_failure_counter** — Verify successful login resets consecutive failure count
+- **test_lockout_expires_after_fifteen_minutes** *(edge case)* — Verify account lockout automatically expires after 15 minutes
+- **test_login_proceeds_when_redis_is_unavailable** *(edge case)* — Verify login works normally if Redis is down
+- **test_blocked_login_attempt_after_lockout** — Verify login is blocked during active lockout period
 
 ## Confluence Documentation References
 
-- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Directly defines the security policy for login attempt protection that this ticket is implementing, including specific requirements for max attempts, lockout duration, and counter reset logic
+- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Directly describes the brute-force protection policy that this ticket is implementing, including specific details about lockout duration, max failed attempts, and counter scoping.
 
 **Suggested Documentation Updates:**
 
