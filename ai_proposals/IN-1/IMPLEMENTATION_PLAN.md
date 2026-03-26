@@ -3,41 +3,56 @@
 **Jira Ticket:** [IN-1](https://anandinfinity0007.atlassian.net/browse/IN-1)
 
 ## Summary
-Implement login attempt protection with Redis-backed lockout mechanism
+Implement login attempt protection with Redis-backed lockout mechanism for preventing brute-force attacks
 
 ## Implementation Plan
 
-**Step 1: Create LoginGuard class in login_guard.py**  
-Implement Redis-backed login failure tracking with methods for recording failures, checking lockout status, and resetting counter
+**Step 1: Create LoginGuard Redis Interaction Class**  
+Implement LoginGuard class in auth/login_guard.py with methods for tracking and managing login failures using Redis
 Files: `auth/login_guard.py`
 
-**Step 2: Implement Redis connection and error handling**  
-Set up Redis connection with fail-open strategy. Ensure graceful handling if Redis is unavailable
+**Step 2: Implement record_failure Method**  
+Create method to increment Redis counter for username, setting 15-minute TTL. Key format: login:fail:{username}
 Files: `auth/login_guard.py`
 
-**Step 3: Modify jwt_handler.py login endpoint**  
-Update login logic to check LoginGuard.is_locked() before password verification. Add HTTP 423 response for locked accounts
+**Step 3: Implement is_locked Method**  
+Add method to check if login attempts exceed 5, return lock status and remaining TTL. Implement fail-open logic for Redis unavailability
+Files: `auth/login_guard.py`
+
+**Step 4: Implement reset Method**  
+Create method to delete Redis key on successful login, clearing failure counter
+Files: `auth/login_guard.py`
+
+**Step 5: Modify JWT Handler Login Flow**  
+Update auth/jwt_handler.py to call LoginGuard methods before password validation and on successful login
 Files: `auth/jwt_handler.py`
 
-**Step 4: Create unit tests for LoginGuard**  
-Develop comprehensive test suite covering lockout scenarios, reset functionality, and Redis failure modes
+**Step 6: Create Unit Tests**  
+Develop comprehensive test cases covering lockout scenarios, reset logic, and Redis failure handling
 Files: `tests/test_login_guard.py`
 
 **Risk Level:** MEDIUM — Medium risk due to security-critical feature involving authentication logic. Potential for introducing authentication bypass if not implemented carefully.
+
+**Deployment Notes:**
+- Ensure Redis connection is configured
+- Update authentication documentation
+- Communicate lockout mechanism to support team
+- Verify no regression in existing login flows
 
 ## Test Suggestions
 
 Framework: `pytest`
 
-- **test_account_locks_after_five_consecutive_failed_attempts** *(edge case)* — Verify account locks after 5 consecutive failed login attempts
+- **test_account_locks_after_five_consecutive_failed_attempts** — Verify account gets locked after 5 consecutive failed login attempts
 - **test_locked_account_returns_retry_after_seconds** — Verify locked account response includes retry-after seconds
-- **test_successful_login_resets_failure_counter** — Verify successful login resets consecutive failure count
-- **test_account_unlocks_after_fifteen_minutes** *(edge case)* — Verify account automatically unlocks after 15 minutes
-- **test_login_proceeds_when_redis_is_unavailable** *(edge case)* — Verify login proceeds normally if Redis is down
+- **test_successful_login_resets_failure_counter** — Verify login failure counter resets after successful authentication
+- **test_account_automatically_unlocks_after_fifteen_minutes** *(edge case)* — Verify account automatically unlocks after 15-minute lockout period
+- **test_login_proceeds_when_redis_is_unavailable** *(edge case)* — Verify login process continues if Redis is down (fail-open behavior)
+- **test_blocking_occurs_on_sixth_login_attempt_when_locked** *(edge case)* — Verify 6th login attempt is blocked regardless of password correctness
 
 ## Confluence Documentation References
 
-- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Directly describes the brute-force protection policy that this ticket is implementing, including specific details about lockout duration, max failed attempts, and counter scoping.
+- [Authentication Security Standards - Brute Force Protection](https://anandinfinity0007.atlassian.net/wiki/spaces/INF/pages/2260994) — Directly defines the security policy for login attempt protection that this ticket is implementing, including specific requirements for max attempts, lockout duration, and counter reset logic
 
 **Suggested Documentation Updates:**
 
